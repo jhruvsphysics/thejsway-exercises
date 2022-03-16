@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Some famous paintings</h2>
+        <table id="paintings">
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Artist</th>
+            </tr>
+        </table>
+        <script>
+            const name = ['name', 'year', 'artist']
+            fetch("https://raw.githubusercontent.com/bpesquet/thejsway/master/resources/paintings.json")
+            .then(res => res.json())
+            .then(data => data.forEach(
+                datum => {let tr=document.createElement("tr");
+                            for (let i=0; i<3; i++){
+                                let td=document.createElement("td")
+                                td.innerText = datum[name[i]]
+                                tr.appendChild(td)
+                            }
+                            
+                            document.getElementById("paintings").appendChild(tr)
+                        }
+                        
+            ))
+        </script>
+    </body>
+</html>
