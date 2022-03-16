@@ -1,0 +1,47 @@
+<!-- Star Wars universe
+The open Star Wars API has all the Star Wars data you've ever wanted. In this exercise, you'll show information about some of the planets in the universe.-->
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Some Star Wars planets</h2>
+        <div id="links"></div>
+        <div id="infos"></div>
+        <script>
+            const pageElement = document.getElementById("links")
+            const infoElement = document.getElementById("infos")
+            for (let i=1; i<=10; i++) {
+                const linkElement = document.createElement("a")
+                linkElement.textContent = i
+                linkElement.href = "#"
+                linkElement.onclick = giveMePlanet
+                pageElement.appendChild(linkElement)
+
+                const breakElement = document.createElement("span")
+                breakElement.textContent = " | "
+
+                const endElement = document.createElement("span")
+                endElement.textContent = "..."
+                if (i < 10) {pageElement.appendChild(breakElement)}
+                else {pageElement.appendChild(breakElement); pageElement.appendChild(endElement)}
+            }
+
+
+            function giveMePlanet(event) {
+                const planetNum = event.target.innerHTML
+                fetch(`https://swapi.dev/api/planets/${planetNum}/`)
+                .then(res => res.json())
+                .then(res => {
+                    const planetNameElement = document.createElement("h1")
+                    planetNameElement.textContent = res.name
+
+                    const planetInfoElement = document.createElement("p")
+                    planetInfoElement.textContent = `Climate: ${res.climate}. Population: ${res.population}. Appears in ${res.films.length} movie(s).`
+                    
+                    infoElement.innerHTML = ""
+                    infoElement.appendChild(planetNameElement)
+                    infoElement.appendChild(planetInfoElement)
+                })
+            }
+        </script>
+    </body>
+</html>
