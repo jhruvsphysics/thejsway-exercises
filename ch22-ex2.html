@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Information about a GitHub user</h1>
+        <input id="user" type="text">        
+        <button id="grabUser">Grab user</button>
+        <div id="github-info"></div>
+        
+        
+        <div id="user-info"></div>
+        <script>
+            const githubElement = document.getElementById("github-info")
+            document.getElementById('grabUser').onclick = function () {
+                const user = document.getElementById("user").value
+                fetch(`https://api.github.com/users/${user}`)
+                .then(res => res.json())
+                .then(res => {
+                    const imgElement = document.createElement("img")
+                    imgElement.src = res.avatar_url
+                    const containerElement = document.createElement("div")
+                    const nameElement = document.createElement("h3")
+                    nameElement.textContent = res.name
+                    const webElement = document.createElement("a")
+                    webElement.href = res.blog
+                    webElement.textContent = res.blog
+                    containerElement.appendChild(nameElement)
+                    containerElement.appendChild(webElement)
+                    
+                    githubElement.innerHTML = ""
+                    githubElement.appendChild(imgElement)
+                    githubElement.appendChild(containerElement)
+                })
+            }
+        </script>
+    </body>
+</html>
