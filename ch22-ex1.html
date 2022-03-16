@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button id="grabButton">Grab a beer</button>
+        <div id="beer"></div>
+        <script>
+            const beerElement = document.getElementById("beer");
+            document.getElementById("grabButton").onclick=grabBeer
+            function grabBeer(){
+                fetch("https://api.punkapi.com/v2/beers/random")
+                .then(res => res.json())
+                .then(data => {
+                    
+                    const nameElement = document.createElement("h2")
+                    nameElement.textContent = data[0].name
+                    const descElement = document.createElement("p")
+                    descElement.textContent = data[0].description
+                    const abvElement = document.createElement("span")
+                    abvElement.textContent = `ABV: ${data[0].abv} %`
+                    const volumeElement = document.createElement("span")
+                    volumeElement.textContent = ` Volume: ${data[0].volume.value} ${data[0].volume.unit}`
+                    const firstBrewElement = document.createElement("span")
+                    firstBrewElement.textContent = ` First brewed on: ${data[0].first_brewed}`
+
+                    beerElement.innerHTML = "";
+                    beerElement.appendChild(nameElement)
+                    beerElement.appendChild(descElement)
+                    beerElement.appendChild(abvElement)
+                    beerElement.appendChild(volumeElement)
+                    beerElement.appendChild(firstBrewElement)
+                })
+            }
+            
+        </script>
+    </body>
+</html>
