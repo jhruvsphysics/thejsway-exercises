@@ -41,6 +41,7 @@ app.post("/api/countries", jsonParser, (request, response) => {
 app.get("/articles", (request, response) => {
     response.sendFile(`${__dirname}/views/article.html`)
 })
+
 let articles = []
 app.post("/articles", upload.array(), (request, response) => {
     console.log(`article submitted!`)
