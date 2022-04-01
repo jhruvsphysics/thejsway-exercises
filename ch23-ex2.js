@@ -7,7 +7,21 @@ const data = {
     ]
 }
 
-fetch("https://thejsway-server.herokuapp.com/api/countries", {
+// fetch("https://thejsway-server.herokuapp.com/api/countries", {
+//     method: "POST",
+//     headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(data)
+// })
+// .then(res => res.text())
+// .then(d => document.getElementById("console").innerText = d)
+// .catch(err => {
+//     console.log(err.message)
+// })
+
+fetch("http://localhost:3000/api/countries", {
     method: "POST",
     headers: {
         Accept: "application/json",
